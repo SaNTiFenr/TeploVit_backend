@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomePage from '@/views/HomePage.vue'  
+import HomePage from '@/views/HomePage.vue'
 
 
 const routes = [
@@ -37,6 +37,11 @@ const routes = [
         name: 'contacts',
         component: () => import('@/views/ContactsView.vue')
     },
+    // {
+    // path: '/portfolio/:id',
+    // name: 'work-detail',
+    // component: () => import('@/Pages/WorkDetail.vue')
+    // },
 ]
 
 const router = createRouter({

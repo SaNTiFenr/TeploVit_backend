@@ -4,9 +4,9 @@
         <h1>Наши выполненные работы</h1>
         <div class="header-divider"></div>
       </div>
-  
+
       <div class="portfolio-grid">
-        <div 
+        <div
           class="portfolio-card"
           v-for="work in works"
           :key="work.id"
@@ -14,12 +14,12 @@
           @mouseleave="hoveredCard = null"
         >
           <div class="image-container">
-            <img 
-              :src="work.image" 
+            <img
+              :src="work.image_url"
               :alt="work.title"
               class="portfolio-image"
             >
-            <div 
+            <div
               class="image-overlay"
               :class="{ 'active': hoveredCard === work.id }"
             ></div>
@@ -27,63 +27,42 @@
           <div class="card-content">
             <h3 class="work-title">{{ work.title }}</h3>
             <p class="work-description">{{ work.description }}</p>
-            <button 
-              class="details-button"
-              :style="{ backgroundColor: hoveredCard === work.id ? '#f35d22' : '#131d82' }"
-            >
-              Подробнее
-            </button>
+            <router-link
+                :to="{ name: 'work-detail', params: { id: work.id } }"
+                class="details-button"
+                :style="{ backgroundColor: hoveredCard === work.id ? '#f35d22' : '#131d82' }"
+                >
+                Подробнее
+            </router-link>
           </div>
         </div>
       </div>
-  
+
       <div class="load-more">
         <button class="load-button">Показать еще</button>
       </div>
     </div>
   </template>
-  
+
   <script>
-  // Импортируем изображения
-  import workImage1 from '@/assets/images/anqipfst0rw.jpg';
-  import workImage2 from '@/assets/images/anqipfst0rw.jpg';
-  import workImage3 from '@/assets/images/anqipfst0rw.jpg';
-  import workImage4 from '@/assets/images/anqipfst0rw.jpg';
-  
-  export default {
-    data() {
-      return {
-        hoveredCard: null,
-        works: [
-          {
-            id: 1,
-            title: 'Монтаж отопления',
-            description: 'Комплексный монтаж системы отопления в частном доме',
-            image: workImage1
-          },
-          {
-            id: 2,
-            title: 'Установка котла',
-            description: 'Установка газового котла с обвязкой',
-            image: workImage2
-          },
-          {
-            id: 3,
-            title: 'Водоснабжение',
-            description: 'Монтаж системы водоснабжения коттеджа',
-            image: workImage3
-          },
-          {
-            id: 4,
-            title: 'Тёплый пол',
-            description: 'Укладка системы водяного тёплого пола',
-            image: workImage4
-          }
-        ]
-      }
+export default {
+  data() {
+    return {
+      hoveredCard: null,
+      works: []
     }
+  },
+  mounted() {
+    axios.get('/api/works')
+      .then(response => {
+        this.works = response.data;
+      })
+      .catch(error => {
+        console.error('Error fetching works:', error);
+      });
   }
-  </script>
+}
+</script>
 
 <style scoped>
 
@@ -220,7 +199,7 @@
     .portfolio-header h1 {
         font-size: 1.8rem;
     }
-    
+
     .portfolio-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
