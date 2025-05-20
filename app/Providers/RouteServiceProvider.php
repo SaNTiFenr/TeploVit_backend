@@ -10,27 +10,32 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
+    /**
+     * Define your route model bindings, pattern filters, etc.
+     */
     public function boot(): void
     {
-        parent::boot(); // Важно: вызов родительского метода
+        $this->configureRateLimiting();
 
         $this->routes(function () {
             // API Routes
-            Route::prefix('api')
-                ->middleware('api')
-                ->group(function () {
-                    Route::get('/test', function () {
-                        return response()->json(['status' => 'OK']);
-                    });
+            Route::middleware('api')
+                ->prefix('api')
+                ->group(base_path('routes/api.php')); // Подключаем отдельный файл с API маршрутами
 
-                    Route::get('/works', function () {
-                        return \App\Models\Work::all();
-                    });
-                });
-
-            // Web Routes (если нужно)
+            // Web Routes
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+        });
+    }
+
+    /**
+     * Configure the rate limiters for the application.
+     */
+    protected function configureRateLimiting(): void
+    {
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
     }
 }

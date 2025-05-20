@@ -37,16 +37,29 @@ const routes = [
         name: 'contacts',
         component: () => import('@/views/ContactsView.vue')
     },
-    // {
-    // path: '/portfolio/:id',
-    // name: 'work-detail',
-    // component: () => import('@/Pages/WorkDetail.vue')
-    // },
+    {
+        path: '/portfolio/:id',
+        name: 'work-detail',
+        component: () => import('@/views/WorkDetail.vue'),
+        props: true
+    },
 ]
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes
-})
+  history: createWebHistory(),
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { top: 0 };
+    }
+  }
+});
+
+// Глобальный обработчик ошибок
+router.onError((error) => {
+  console.error('Router error:', error);
+});
 
 export default router

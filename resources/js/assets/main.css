@@ -1,8 +1,8 @@
 @font-face {
-  font-family: "Finder"; 
-  src: url('@/assets/fonts/Finder.ttf') format("truetype"); 
-  font-style: normal; 
-  font-weight: normal; 
+  font-family: "Finder";
+  src: url('@/assets/fonts/Finder.ttf') format("truetype");
+  font-style: normal;
+  font-weight: normal;
 }
 
 main{
@@ -11,15 +11,15 @@ main{
 }
 
 li{
-  font-family: "Finder"; 
-  src: url("../Fonts/Finder.ttf") format("truetype"); 
-  font-style: normal; 
-  font-weight: normal; 
+  font-family: "Finder";
+  src: url("../Fonts/Finder.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
 }
 
 p{
   font-family: "Finder";
-} 
+}
 
 body{
   margin: 0px;
@@ -79,9 +79,9 @@ color: #fff;
   margin-right: auto; */
   text-decoration: none;
   padding-top: 1%;
-  padding-bottom: 1%; 
+  padding-bottom: 1%;
   padding-right: 2%;
-  padding-left: 2%; 
+  padding-left: 2%;
 }
 
 .Nav_Bar a:hover{
@@ -289,7 +289,7 @@ h3 {
   background-size: cover;
   background-position: center;
   height: 850px;
-  background: 
+  background:
     linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.7) 0%,
@@ -329,7 +329,7 @@ h3 {
   padding: 12px 24px;
   border: none;
   border-radius: 6px;
-  font-family: "Finder"; 
+  font-family: "Finder";
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -464,7 +464,7 @@ footer{
 .footer_info p{
   margin: 0px;
   font-size: 16px;
-} 
+}
 
 .footer_info{
   text-align: center;
@@ -474,7 +474,7 @@ footer{
   position: relative;
   width: 100%;
   margin: auto;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .slides {
@@ -493,7 +493,7 @@ footer{
 
 .slide img{
   margin: 0px;
-  
+
 }
 
 /* .active {
@@ -501,11 +501,11 @@ footer{
 }
 
 .prev{
-  
+
 }
 
 .next{
-  
+
 } */
 
 .prev,
@@ -525,10 +525,10 @@ footer{
   width: 50%;
   padding: 2%;
   /* border-radius: 1%;
-  box-shadow: 
-  -5px 0 5px -3px rgba(0,0,0,0.5), 
+  box-shadow:
+  -5px 0 5px -3px rgba(0,0,0,0.5),
   5px 0 5px -3px rgba(0,0,0,0.5),
-  0 -5px 5px -3px rgba(0,0,0,0), 
+  0 -5px 5px -3px rgba(0,0,0,0),
   0 5px 5px -3px rgba(0,0,0,0); */
 }
 
@@ -537,18 +537,18 @@ footer{
   width: 50%;
   padding: 2%;
   /* border-radius: 1%;
-  box-shadow: 
-  -5px 0 5px -3px rgba(0,0,0,0.5), 
+  box-shadow:
+  -5px 0 5px -3px rgba(0,0,0,0.5),
   5px 0 5px -3px rgba(0,0,0,0.5),
-  0 -5px 5px -3px rgba(0,0,0,0), 
+  0 -5px 5px -3px rgba(0,0,0,0),
   0 5px 5px -3px rgba(0,0,0,0); */
 }
 
 .up_title{
-  font-family: "Finder"; 
-  src: url("../Fonts/Finder.ttf") format("truetype"); 
-  font-style: normal; 
-  font-weight: normal; 
+  font-family: "Finder";
+  src: url("../Fonts/Finder.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
   font-size: 48px;
 }
 
@@ -652,7 +652,7 @@ button {
   width: 15px;
   height: 15px;
   margin-left: 5px;
-  margin-right: 5px; 
+  margin-right: 5px;
   background-color: #bbb;
   border-radius: 50%;
   cursor: pointer;
@@ -761,7 +761,7 @@ textarea:focus {
 }
 
 .table_container{
-  font-family: "Finder"; 
+  font-family: "Finder";
   margin: auto;
   background-color: white;
   border-radius: 8px;
@@ -1237,6 +1237,7 @@ button:hover {
   line-height: 1.5;
 }
 
+
 @media (max-width: 1024px) {
   .Up_header{
       flex-direction: column;
@@ -1247,12 +1248,12 @@ button:hover {
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .buttons-container {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .action-button {
     width: 100%;
   }
@@ -1265,19 +1266,19 @@ button:hover {
   .image-text-block {
     flex-direction: column;
   }
-  
+
   .content-image {
     width: 100%;
   }
-  
+
   .features-list {
     columns: 1;
   }
-  
+
   .services-title {
     font-size: 1.8rem;
   }
-  
+
   .slide-title {
     font-size: 1.5rem;
   }
@@ -1300,7 +1301,7 @@ button:hover {
   .about-header h1 {
     font-size: 2rem;
   }
-  
+
   .reason-card {
     flex: 1 1 100%;
   }
@@ -1338,17 +1339,17 @@ button:hover {
   .portfolio-header h1 {
     font-size: 1.8rem;
   }
-  
+
   .portfolio-grid {
     gap: 1.5rem;
   }
-  
+
   .portfolio-card {
     flex: 1 1 100%;
   }
 
   .blue_logo{
-      
+
       font-size: 17px;
   }
 
@@ -1445,13 +1446,13 @@ button:hover {
   .tab-links{
       flex-direction: row;
       flex-wrap: wrap;
-      
+
   }
 
   .svg_wrapper{
     flex-direction: column;
   }
-  
+
   .Main_Bg_p{
     font-size: 24px;
   }

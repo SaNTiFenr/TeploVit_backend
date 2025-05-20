@@ -12,4 +12,7 @@ class Work extends Model
     {
         return asset('storage/'.$this->image_path);
     }
+    protected $casts = [
+    'id' => 'integer'
+    ];
 }

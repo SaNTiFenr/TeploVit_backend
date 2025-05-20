@@ -29,10 +29,11 @@
             <p class="work-description">{{ work.description }}</p>
             <router-link
                 :to="{ name: 'work-detail', params: { id: work.id } }"
-                class="details-button"
                 :style="{ backgroundColor: hoveredCard === work.id ? '#f35d22' : '#131d82' }"
                 >
+                <button class="details-button ">
                 Подробнее
+                </button>
             </router-link>
           </div>
         </div>
@@ -44,23 +45,36 @@
     </div>
   </template>
 
-  <script>
+ <script>
 export default {
   data() {
     return {
       hoveredCard: null,
-      works: []
+      works: [],
+      error: null
     }
   },
-  mounted() {
-    axios.get('/api/works')
-      .then(response => {
-        this.works = response.data;
-      })
-      .catch(error => {
-        console.error('Error fetching works:', error);
-      });
+async mounted() {
+  try {
+    const response = await axios.get('/api/works');
+
+    // Используем вложенный массив data
+    if (!response.data.data || !Array.isArray(response.data.data)) {
+      throw new Error('Некорректная структура данных');
+    }
+
+    this.works = response.data.data.map(work => ({
+      id: work.id,
+      title: work.title,
+      description: work.description,
+      image_url: work.imageUrl // Обратите внимание на imageUrl с большой буквы
+    }));
+
+  } catch (error) {
+    console.error('Ошибка загрузки:', error);
+    this.works = [];
   }
+}
 }
 </script>
 
