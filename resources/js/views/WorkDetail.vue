@@ -74,9 +74,7 @@ export default {
   line-height: 1.6;
   color: #666;
 }
-.description_title{
 
-}
 
 .more_title{
     text-align: -webkit-center;
