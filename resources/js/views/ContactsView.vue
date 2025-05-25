@@ -23,7 +23,7 @@
                             <p>+ 375 29 717-78-80</p>
                         </div>
                         <p>
-                            Электронная почта: <a href="mailto:teplo.vit@mail.ru">teplo.vit@mail.ru</a> 
+                            Электронная почта: <a href="mailto:teplo.vit@mail.ru">teplo.vit@mail.ru</a>
                         </p>
                     </div>
                 </div>
@@ -31,8 +31,10 @@
                     <p class="map_wr_p">
                         Схема проезда
                     </p>
-                    <iframe src="https://yandex.ru/map-widget/v1/?scroll=false&amp;source=constructor-api&amp;um=constructor%3AV3aK97zjxxN1nqcru_bnX0L1R2zGUcGq" frameborder="0" allowfullscreen="true" width="600px" height="450px" style="display: block;">
-                    </iframe>
+                    <div style="position:relative;overflow:hidden;">
+                        <a href="https://yandex.by/maps/154/vitebsk/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Витебск</a><a href="https://yandex.by/maps/154/vitebsk/house/Z0kYdAVgTUEOQFtvfX5xeXtibA==/?ll=30.220909%2C55.208699&utm_medium=mapframe&utm_source=maps&z=18.88" style="color:#eee;font-size:12px;position:absolute;top:14px;">Улица Гагарина, 24 — Яндекс Карты</a><iframe src="https://yandex.by/map-widget/v1/?ll=30.220909%2C55.208699&mode=whatshere&whatshere%5Bpoint%5D=30.220180%2C55.208612&whatshere%5Bzoom%5D=17&z=18.88" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe>
+                    </div>
+
                 </div>
                 <div class="form-container">
                     <p class="big_p">Форма обратной связи</p>
@@ -61,7 +63,7 @@ import MtsImage from '@/assets/images/mts.jpg'
 export default {
     data() {
     return {
-    images: 
+    images:
             {
                 Mts: MtsImage
             }

@@ -14,7 +14,11 @@ class WorksController extends Controller
 
     public function show($id)
     {
-        $work = Work::findOrFail($id);
-        return new WorksResource($work);
+        try {
+            $work = Work::findOrFail($id);
+            return new WorksResource($work);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(['error' => 'Работа не найдена'], 404);
+        }
     }
 }

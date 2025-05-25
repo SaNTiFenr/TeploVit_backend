@@ -28,8 +28,8 @@ class Work extends Resource
         Textarea::make('Краткое описание', 'description')
             ->rules('required'),
 
-        Textarea::make('Полное описание', 'full_description')
-            ->hideFromIndex(),
+        Textarea::make('Полное описание', 'full_description') // Исправлено на snake_case
+        ->rules('required'),
 
         Image::make('Изображение', 'image_path')
             ->disk('public')

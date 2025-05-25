@@ -6,25 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up()
-{
-    Schema::create('works', function (Blueprint $table) {
-        $table->id();
-        $table->string('title');
-        $table->text('description');
-        $table->text('full_description')->nullable();
-        $table->string('image_path');
-        $table->timestamps();
-    });
-}
+    {
+        Schema::create('works', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->text('full_description'); // Используем snake_case
+            $table->string('image_path');
+            $table->timestamps();
+        });
+    }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('works');
     }

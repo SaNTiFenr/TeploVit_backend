@@ -1,5 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, createMemoryHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
+
+const isServer = typeof window === 'undefined';
+const history = isServer ? createMemoryHistory() : createWebHistory();
 
 
 const routes = [
@@ -46,7 +49,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history,
   routes,
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
