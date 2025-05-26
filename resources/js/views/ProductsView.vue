@@ -18,11 +18,11 @@
             {{ category.name }}
           </option>
         </select>
-        
+
         <div class="search-box">
-          <input 
-            type="text" 
-            v-model="searchQuery" 
+          <input
+            type="text"
+            v-model="searchQuery"
             placeholder="Поиск по названию..."
             class="search-input"
           >
@@ -34,7 +34,7 @@
           </button>
         </div>
       </div>
-      
+
       <div class="sort-section">
         <span class="sort-label">Сортировка:</span>
         <select v-model="sortOption" class="sort-select">
@@ -46,30 +46,40 @@
       </div>
     </div>
 
+    <!-- Состояния загрузки и ошибок -->
+    <div v-if="loading" class="loading-overlay">
+      <div class="loader"></div>
+      <p>Загрузка товаров...</p>
+    </div>
+
+    <div v-if="error" class="error-message">
+      {{ error }}
+    </div>
+
     <!-- Список товаров -->
-    <div class="products-grid">
-      <div 
-        v-for="product in filteredProducts" 
-        :key="product.id" 
+    <div class="products-grid" v-if="!loading && !error">
+      <div
+        v-for="product in products"
+        :key="product.id"
         class="product-card"
         @click="showProductDetails(product)"
       >
         <div class="product-image-container">
-          <img :src="product.image" :alt="product.name" class="product-image">
-          <div v-if="product.isNew" class="product-badge">Новинка</div>
+          <img :src="getImageUrl(product.image)" :alt="product.name" class="product-image">
+          <div v-if="product.is_new" class="product-badge">Новинка</div>
         </div>
-        
+
         <div class="product-info">
           <h3 class="product-title">{{ product.name }}</h3>
           <p class="product-category">{{ getCategoryName(product.category_id) }}</p>
-          
+
           <div class="product-specs">
-            <div class="spec-item" v-for="spec in product.specs.slice(0, 2)" :key="spec.key">
+            <div class="spec-item" v-for="spec in product.specs?.slice(0, 2)" :key="spec.key">
               <span class="spec-key">{{ spec.key }}:</span>
               <span class="spec-value">{{ spec.value }}</span>
             </div>
           </div>
-          
+
           <div class="product-footer">
             <span class="product-price">{{ formatPrice(product.price) }} руб.</span>
             <button class="product-button" @click.stop="addToCart(product)">
@@ -81,10 +91,10 @@
     </div>
 
     <!-- Пагинация -->
-    <div class="pagination">
-      <button 
-        v-for="page in totalPages" 
-        :key="page" 
+    <div class="pagination" v-if="!loading && !error">
+      <button
+        v-for="page in totalPages"
+        :key="page"
         class="page-button"
         :class="{ 'active': currentPage === page }"
         @click="currentPage = page"
@@ -97,42 +107,42 @@
     <div v-if="selectedProduct" class="modal-overlay" @click.self="closeModal">
       <div class="product-modal">
         <button class="modal-close" @click="closeModal">×</button>
-        
+
         <div class="modal-content">
           <div class="modal-images">
-            <img :src="selectedProduct.image" :alt="selectedProduct.name" class="main-image">
+            <img :src="getImageUrl(selectedProduct.image)" :alt="selectedProduct.name" class="main-image">
             <div class="thumbnails">
-              <img 
-                v-for="(img, index) in selectedProduct.images" 
-                :key="index" 
-                :src="img" 
+              <img
+                v-for="(img, index) in selectedProduct.images"
+                :key="index"
+                :src="getImageUrl(img)"
                 @click="selectedImage = img"
                 class="thumbnail"
                 :class="{ 'active': selectedImage === img }"
               >
             </div>
           </div>
-          
+
           <div class="modal-details">
             <h2>{{ selectedProduct.name }}</h2>
             <p class="modal-category">{{ getCategoryName(selectedProduct.category_id) }}</p>
-            
+
             <div class="price-section">
               <span class="modal-price">{{ formatPrice(selectedProduct.price) }} руб.</span>
-              <span v-if="selectedProduct.oldPrice" class="modal-old-price">
-                {{ formatPrice(selectedProduct.oldPrice) }} руб.
+              <span v-if="selectedProduct.old_price" class="modal-old-price">
+                {{ formatPrice(selectedProduct.old_price) }} руб.
               </span>
             </div>
-            
+
             <div class="modal-specs">
               <div class="spec-row" v-for="spec in selectedProduct.specs" :key="spec.key">
                 <span class="spec-name">{{ spec.key }}:</span>
                 <span class="spec-value">{{ spec.value }}</span>
               </div>
             </div>
-            
+
             <p class="modal-description">{{ selectedProduct.description }}</p>
-            
+
             <div class="modal-actions">
               <div class="quantity-control">
                 <button @click="decreaseQuantity">-</button>
@@ -151,6 +161,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -162,103 +174,104 @@ export default {
       quantity: 1,
       selectedProduct: null,
       selectedImage: '',
-      categories: [
-        { id: 1, name: 'Газовые котлы' },
-        { id: 2, name: 'Твердотопливные котлы' },
-        { id: 3, name: 'Электрические котлы' },
-        { id: 4, name: 'Радиаторы' },
-        { id: 5, name: 'Теплые полы' },
-        { id: 6, name: 'Бойлеры' },
-      ],
-      products: [
-        {
-          id: 1,
-          name: 'Газовый котел Baxi Eco Compact 24F',
-          category_id: 1,
-          price: 245000,
-          oldPrice: 259900,
-          isNew: true,
-          image: 'https://example.com/baxi-eco-compact.jpg',
-          images: [
-            'https://example.com/baxi-eco-compact-1.jpg',
-            'https://example.com/baxi-eco-compact-2.jpg',
-            'https://example.com/baxi-eco-compact-3.jpg'
-          ],
-          specs: [
-            { key: 'Мощность', value: '24 кВт' },
-            { key: 'КПД', value: '92.5%' },
-            { key: 'Тип камеры', value: 'Закрытая' },
-            { key: 'Габариты', value: '730x400x299 мм' }
-          ],
-          description: 'Настенный газовый котел с закрытой камерой сгорания и высоким КПД. Идеальное решение для отопления частного дома площадью до 240 м².'
-        },
-        // Другие товары...
-      ]
+      categories: [],
+      products: [],
+      totalItems: 0,
+      loading: false,
+      error: null
     }
   },
   computed: {
-    filteredProducts() {
-      let filtered = this.products;
-      
-      // Фильтрация по категории
-      if (this.selectedCategory !== 'all') {
-        filtered = filtered.filter(p => p.category_id == this.selectedCategory);
-      }
-      
-      // Поиск по названию
-      if (this.searchQuery) {
-        const query = this.searchQuery.toLowerCase();
-        filtered = filtered.filter(p => 
-          p.name.toLowerCase().includes(query)
-        );
-      }
-      
-      // Сортировка
-      const [sortField, sortDirection] = this.sortOption.split('-');
-      filtered.sort((a, b) => {
-        if (sortField === 'price') {
-          return sortDirection === 'asc' ? a.price - b.price : b.price - a.price;
-        } else {
-          return sortDirection === 'asc' 
-            ? a.name.localeCompare(b.name) 
-            : b.name.localeCompare(a.name);
-        }
-      });
-      
-      // Пагинация
-      const start = (this.currentPage - 1) * this.itemsPerPage;
-      return filtered.slice(start, start + this.itemsPerPage);
-    },
     totalPages() {
-      return Math.ceil(this.products.length / this.itemsPerPage);
+      return Math.ceil(this.totalItems / this.itemsPerPage);
+    }
+  },
+  watch: {
+    selectedCategory() {
+      this.currentPage = 1;
+      this.fetchProducts();
+    },
+    searchQuery() {
+      this.currentPage = 1;
+      this.fetchProducts();
+    },
+    sortOption() {
+      this.fetchProducts();
+    },
+    currentPage() {
+      this.fetchProducts();
     }
   },
   methods: {
+    async fetchProducts() {
+      this.loading = true;
+      this.error = null;
+      try {
+        const params = {
+          page: this.currentPage,
+          category: this.selectedCategory !== 'all' ? this.selectedCategory : null,
+          search: this.searchQuery,
+          sort_option: this.sortOption,
+          itemsPerPage: this.itemsPerPage
+        };
+
+        const response = await axios.get('/api/products', { params });
+        console.log('API Response:', response.data);
+        this.products = response.data.data;
+        this.totalItems = response.data.meta.total_items;
+      } catch (error) {
+        this.error = 'Ошибка загрузки товаров';
+        console.error('Ошибка загрузки товаров:', error);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async fetchCategories() {
+      try {
+        const response = await axios.get('/api/categories');
+        this.categories = response.data;
+      } catch (error) {
+        console.error('Ошибка загрузки категорий:', error);
+      }
+    },
+
     getCategoryName(id) {
       const category = this.categories.find(c => c.id == id);
       return category ? category.name : '';
     },
+
     formatPrice(price) {
       return new Intl.NumberFormat('ru-RU').format(price);
     },
+
+    getImageUrl(path) {
+      return path ? `/storage/${path}` : 'https://via.placeholder.com/300';
+    },
+
     showProductDetails(product) {
       this.selectedProduct = product;
       this.selectedImage = product.image;
       this.quantity = 1;
     },
+
     closeModal() {
       this.selectedProduct = null;
     },
+
     increaseQuantity() {
       this.quantity++;
     },
+
     decreaseQuantity() {
       if (this.quantity > 1) this.quantity--;
     },
+
     addToCart(product) {
-      // Логика добавления в корзину
       console.log('Добавлено в корзину:', product);
+      // Логика добавления в корзину
     },
+
     addSelectedToCart() {
       if (this.selectedProduct) {
         const item = {
@@ -269,11 +282,52 @@ export default {
         this.closeModal();
       }
     }
+  },
+  mounted() {
+    this.fetchCategories();
+    this.fetchProducts();
   }
 }
 </script>
 
 <style scoped>
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-message {
+  color: #dc3545;
+  padding: 1rem;
+  border: 1px solid #dc3545;
+  border-radius: 4px;
+  margin: 1rem;
+  text-align: center;
+}
 .products-page {
   width: 100%;
   margin: 0 auto;
@@ -729,24 +783,24 @@ export default {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .filter-section {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .search-box {
     max-width: none;
   }
-  
+
   .modal-content {
     padding: 1.5rem;
   }
-  
+
   .modal-actions {
     flex-direction: column;
   }
-  
+
   .add-to-cart {
     width: 100%;
   }
@@ -766,7 +820,7 @@ export default {
     padding-right: 1.5rem;
     margin-bottom: 0;
   }
-  
+
   .modal-details {
     width: 50%;
     padding-left: 1.5rem;
