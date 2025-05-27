@@ -37,37 +37,132 @@
 
                 </div>
                 <div class="form-container">
-                    <p class="big_p">Форма обратной связи</p>
-                    <form action="#" method="post">
-                        <div class="form-group">
-                            <label for="name">Имя:</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
+                <p class="big_p">Форма обратной связи</p>
+                        <form @submit.prevent="submitForm">
+                            <div class="form-group">
+                                <label for="name">Имя:</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    v-model="form.name"
+                                    :class="{ 'error': errors.name }"
+                                >
+                                <span v-if="errors.name" class="error-message">{{ errors.name }}</span>
+                            </div>
+
+                            <div class="form-group">
                             <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
+                            <input
+                                type="email"
+                                id="email"
+                                v-model="form.email"
+                                :class="{ 'error': errors.email }"
+                            >
+                            <span v-if="errors.email" class="error-message">{{ errors.email }}</span>
+                            </div>
+
+                            <div class="form-group">
                             <label for="message">Сообщение:</label>
-                            <textarea id="message" name="message" rows="4" required></textarea>
+                            <textarea
+                                id="message"
+                                rows="4"
+                                v-model="form.message"
+                                :class="{ 'error': errors.message }"
+                            ></textarea>
+                            <span v-if="errors.message" class="error-message">{{ errors.message }}</span>
+                            </div>
+
+                            <button type="submit" class="form_button">Отправить</button>
+
+                        <div v-if="successMessage" class="success-message">
+                        {{ successMessage }}
                         </div>
-                        <button type="submit" class="form_button">Отправить</button>
                     </form>
                 </div>
             </div>
         </div>
 </template>
+
 <script>
-import MtsImage from '@/assets/images/mts.jpg'
+import axios from 'axios';
+import MtsImage from '@/assets/images/mts.jpg';
 
 export default {
-    data() {
+  data() {
     return {
-    images:
-            {
-                Mts: MtsImage
-            }
-        }
+      images: { Mts: MtsImage },
+      form: {
+        name: '',
+        email: '',
+        message: ''
+      },
+      errors: {},
+      successMessage: ''
+    };
+  },
+  methods: {
+    validateForm() {
+      this.errors = {};
+
+      if (!this.form.name.trim()) {
+        this.errors.name = 'Пожалуйста, введите ваше имя';
+      }
+
+      if (!this.form.email.trim()) {
+        this.errors.email = 'Пожалуйста, введите ваш email';
+      } else if (!this.validEmail(this.form.email)) {
+        this.errors.email = 'Пожалуйста, введите корректный email';
+      }
+
+      if (!this.form.message.trim()) {
+        this.errors.message = 'Пожалуйста, введите сообщение';
+      }
+
+      return Object.keys(this.errors).length === 0;
     },
+
+    validEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    },
+
+    async submitForm() {
+      if (!this.validateForm()) return;
+
+      try {
+        const response = await axios.post('/api/contact', {
+          name: this.form.name,
+          email: this.form.email,
+          message: this.form.message
+        });
+
+        this.successMessage = 'Сообщение успешно отправлено!';
+        this.form = { name: '', email: '', message: '' };
+        setTimeout(() => this.successMessage = '', 3000);
+
+      } catch (error) {
+        this.successMessage = 'Ошибка при отправке сообщения. Пожалуйста, попробуйте позже.';
+        console.error('Ошибка отправки:', error);
+      }
+    }
+  }
 }
 </script>
+<style scoped>
+.error {
+  border: 1px solid red !important;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  display: block;
+}
+
+.success-message {
+  color: green;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+</style>

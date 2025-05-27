@@ -19,3 +19,4 @@ Route::get('/works/{id}', [WorksController::class, 'show']);
 // Маршрут для получения продукции
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/categories', [CategoryController::class, 'index']);
+Route::post('/contact', [ContactController::class, 'send']);

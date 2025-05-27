@@ -46,12 +46,13 @@
       </div>
     </div>
 
-    <!-- Состояния загрузки и ошибок -->
+    <!-- Состояния загрузки -->
     <div v-if="loading" class="loading-overlay">
       <div class="loader"></div>
       <p>Загрузка товаров...</p>
     </div>
 
+    <!-- Сообщение об ошибке -->
     <div v-if="error" class="error-message">
       {{ error }}
     </div>
@@ -82,8 +83,8 @@
 
           <div class="product-footer">
             <span class="product-price">{{ formatPrice(product.price) }} руб.</span>
-            <button class="product-button" @click.stop="addToCart(product)">
-              В корзину
+            <button class="product-button" @click.stop="openContactModal">
+              Заказать
             </button>
           </div>
         </div>
@@ -103,10 +104,33 @@
       </button>
     </div>
 
+    <!-- Модальное окно с контактами -->
+    <div v-if="showContactModal" class="modal-overlay" @click.self="closeContactModal">
+      <div class="contact-modal">
+        <button class="modal-close" @click="closeContactModal">×</button>
+
+        <div class="contact-modal-content">
+          <h2>Свяжитесь с нами</h2>
+          <div class="contact-info">
+            <p>Телефоны для заказа:</p>
+            <ul class="phone-numbers">
+              <li>
+                <a href="tel:+375336130108">+375 33 613-01-08</a>
+              </li>
+              <li>
+                <a href="tel:+375297177880">+375 29 717-78-80</a>
+              </li>
+            </ul>
+            <p>Или оставьте заявку на сайте</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Модальное окно с деталями товара -->
-    <div v-if="selectedProduct" class="modal-overlay" @click.self="closeModal">
+    <div v-if="selectedProduct" class="modal-overlay" @click.self="closeProductModal">
       <div class="product-modal">
-        <button class="modal-close" @click="closeModal">×</button>
+        <button class="modal-close" @click="closeProductModal">×</button>
 
         <div class="modal-content">
           <div class="modal-images">
@@ -142,17 +166,6 @@
             </div>
 
             <p class="modal-description">{{ selectedProduct.description }}</p>
-
-            <div class="modal-actions">
-              <div class="quantity-control">
-                <button @click="decreaseQuantity">-</button>
-                <span>{{ quantity }}</span>
-                <button @click="increaseQuantity">+</button>
-              </div>
-              <button class="add-to-cart" @click="addSelectedToCart">
-                Добавить в корзину
-              </button>
-            </div>
           </div>
         </div>
       </div>
@@ -171,14 +184,14 @@ export default {
       sortOption: 'name-asc',
       currentPage: 1,
       itemsPerPage: 8,
-      quantity: 1,
       selectedProduct: null,
       selectedImage: '',
       categories: [],
       products: [],
       totalItems: 0,
       loading: false,
-      error: null
+      error: null,
+      showContactModal: false
     }
   },
   computed: {
@@ -216,7 +229,6 @@ export default {
         };
 
         const response = await axios.get('/api/products', { params });
-        console.log('API Response:', response.data);
         this.products = response.data.data;
         this.totalItems = response.data.meta.total_items;
       } catch (error) {
@@ -252,35 +264,18 @@ export default {
     showProductDetails(product) {
       this.selectedProduct = product;
       this.selectedImage = product.image;
-      this.quantity = 1;
     },
 
-    closeModal() {
+    closeProductModal() {
       this.selectedProduct = null;
     },
 
-    increaseQuantity() {
-      this.quantity++;
+    openContactModal() {
+      this.showContactModal = true;
     },
 
-    decreaseQuantity() {
-      if (this.quantity > 1) this.quantity--;
-    },
-
-    addToCart(product) {
-      console.log('Добавлено в корзину:', product);
-      // Логика добавления в корзину
-    },
-
-    addSelectedToCart() {
-      if (this.selectedProduct) {
-        const item = {
-          product: this.selectedProduct,
-          quantity: this.quantity
-        };
-        this.addToCart(item);
-        this.closeModal();
-      }
+    closeContactModal() {
+      this.showContactModal = false;
     }
   },
   mounted() {
@@ -303,6 +298,52 @@ export default {
   align-items: center;
   justify-content: center;
   z-index: 1000;
+}
+.contact-modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+}
+
+.contact-modal-content {
+  text-align: center;
+}
+
+.contact-info {
+  margin-top: 1rem;
+}
+
+.phone-numbers {
+  list-style: none;
+  padding: 0;
+}
+
+.phone-numbers li {
+  margin: 1rem 0;
+}
+
+.phone-numbers a {
+  color: #131d82;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.phone-numbers a:hover {
+  text-decoration: underline;
+}
+
+/* Изменяем стиль кнопки */
+.product-button {
+  background-color: #131d82;
+  color: white;
+  /* ... остальные стили кнопки ... */
+}
+
+.product-button:hover {
+  background-color: #0f155e;
 }
 
 .loader {
