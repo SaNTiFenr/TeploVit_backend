@@ -543,7 +543,7 @@ export default {
 .product-specs {
   margin: 1rem 0;
   border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  /*border-bottom: 1px solid #eee;*/
   padding: 0.8rem 0;
 }
 
@@ -819,56 +819,90 @@ export default {
 }
 
 /* Адаптивность */
-@media (max-width: 1024px) {
-  .products-controls {
-    flex-direction: column;
-    align-items: stretch;
-  }
+    @media (max-width: 1024px) {
+    .product-title{
+        font-size: 12px;
+    }
+    .price-section{
+        font-size: 10px;
+    }
+    .modal-details h2{
+        font-size: 2.5rem;
+    }
+    .modal-category{
+        font-size: 2rem;
+    }
+    .modal-price{
+        font-size: 2.5rem;
+    }
+    .products-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    /* .product-price{
+        font-size
+    } */
 
-  .filter-section {
-    flex-direction: column;
-    align-items: stretch;
-  }
+    .product-category{
+        font-size: 10px;
+    }
 
-  .search-box {
-    max-width: none;
-  }
+    .filter-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
 
-  .modal-content {
-    padding: 1.5rem;
-  }
+    .search-box {
+        max-width: none;
+    }
 
-  .modal-actions {
-    flex-direction: column;
-  }
+    .modal-content {
+        padding: 1.5rem;
+    }
 
-  .add-to-cart {
-    width: 100%;
-  }
-}
+    .modal-actions {
+        flex-direction: column;
+    }
 
-@media (max-width: 480px) {
-  .modal-content {
-    flex-direction: row;
-  }
+    .add-to-cart {
+        width: 100%;
+    }
+    }
 
-  .products-page{
-    padding: 0%;
-  }
+    @media (max-width: 480px) {
+    .modal-content {
+        flex-direction: row;
+    }
 
-  .modal-images {
-    width: 50%;
-    padding-right: 1.5rem;
-    margin-bottom: 0;
-  }
+    .product-title{
+        font-size: 12px;
+    }
 
-  .modal-details {
-    width: 50%;
-    padding-left: 1.5rem;
-  }
-  .filter-select,
-  .sort-select{
-    padding: 0px;
-  }
+    .product-title{
+        font-size: 10px;
+    }
+
+    .price-section{
+        font-size: 10px;
+    }
+
+    .products-page{
+        padding: 0%;
+    }
+
+    .modal-images {
+        width: 50%;
+        padding-right: 1.5rem;
+        margin-bottom: 0;
+    }
+
+    .modal-details {
+        width: 50%;
+        padding-left: 1.5rem;
+    }
+    .filter-select,
+    .sort-select{
+        padding: 0px;
+    }
 }
 </style>

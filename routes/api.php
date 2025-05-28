@@ -3,6 +3,7 @@
 use App\Models\Work;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WorksController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 
