@@ -22,6 +22,7 @@ class NovaAdminSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => Hash::make('password'),
             ]);
+            // создаем категорию
             
             $this->command->info('Nova Admin создан успешно!');
             $this->command->info('Email: admin@teplovit.com');
