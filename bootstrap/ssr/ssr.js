@@ -167,17 +167,17 @@ const routes = [
   {
     path: "/services",
     name: "services",
-    component: () => import("./assets/ServicesView-bX6DphZY.js")
+    component: () => import("./assets/ServicesView-CzqiHZkm.js")
   },
   {
     path: "/products",
     name: "products",
-    component: () => import("./assets/ProductsView-CGAKvW6w.js")
+    component: () => import("./assets/ProductsView-DNuEdI7l.js")
   },
   {
     path: "/solutions",
     name: "solutions",
-    component: () => import("./assets/SolutionsView-D9XamcxA.js")
+    component: () => import("./assets/SolutionsView-BOsuisD0.js")
   },
   {
     path: "/portfolio",
@@ -192,7 +192,7 @@ const routes = [
   {
     path: "/contacts",
     name: "contacts",
-    component: () => import("./assets/ContactsView-Cu64HYXm.js")
+    component: () => import("./assets/ContactsView-jUcnE8Vo.js")
   },
   {
     path: "/portfolio/:id",
@@ -216,8 +216,8 @@ router.onError((error) => {
   console.error("Router error:", error);
 });
 const LogoImage = "/build/assets/logo_0_2-DYWlkWF5.png";
-const VkImage = "/build/assets/black_vk-BU0ocSDV.svg";
-const InstImage = "/build/assets/black_inst-ChYdEMyH.svg";
+const VkImage = "/build/assets/black_vk-Cem1GWhh.svg";
+const InstImage = "/build/assets/black_inst-BOXvg027.svg";
 const MtsImage = "/build/assets/mts-CD6J5ctd.jpg";
 const _sfc_main$2 = {
   data() {
@@ -242,14 +242,14 @@ const _sfc_main$2 = {
 };
 function _sfc_ssrRender$2(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   const _component_router_link = resolveComponent("router-link");
-  _push(`<header${ssrRenderAttrs(mergeProps({ class: "site-header" }, _attrs))} data-v-1fe4b404><div class="top-header" data-v-1fe4b404><div class="header-container" data-v-1fe4b404><div class="brand-section" data-v-1fe4b404>`);
+  _push(`<header${ssrRenderAttrs(mergeProps({ class: "site-header" }, _attrs))} data-v-31f62419><div class="top-header" data-v-31f62419><div class="header-container" data-v-31f62419><div class="brand-section" data-v-31f62419>`);
   _push(ssrRenderComponent(_component_router_link, {
     to: "/",
     class: "logo-link"
   }, {
     default: withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
-        _push2(`<img${ssrRenderAttr("src", $data.images.Logo)} alt="ТеплоВит" class="logo-img" data-v-1fe4b404${_scopeId}>`);
+        _push2(`<img${ssrRenderAttr("src", $data.images.Logo)} alt="ТеплоВит" class="logo-img" data-v-31f62419${_scopeId}>`);
       } else {
         return [
           createVNode("img", {
@@ -262,7 +262,7 @@ function _sfc_ssrRender$2(_ctx, _push, _parent, _attrs, $props, $setup, $data, $
     }),
     _: 1
   }, _parent));
-  _push(`<div class="brand-text" data-v-1fe4b404><div class="brand-name" data-v-1fe4b404><p class="red-text" data-v-1fe4b404>Компания &quot;ТеплоВит&quot; в Витебске</p></div><div class="brand-description" data-v-1fe4b404><p class="blue-text" data-v-1fe4b404>Отопление, Водоснабжение</p><p class="blue-text" data-v-1fe4b404>Альтернативная энергетика</p></div></div></div><div class="contacts-section" data-v-1fe4b404><div class="contact-item" data-v-1fe4b404><a href="#" class="social-link" data-v-1fe4b404><img${ssrRenderAttr("src", $data.images.Vk)} alt="VK" class="social-icon" data-v-1fe4b404><span data-v-1fe4b404>Наши соц сети</span></a></div><div class="contact-item" data-v-1fe4b404><a href="#" class="social-link" data-v-1fe4b404><img${ssrRenderAttr("src", $data.images.Inst)} alt="Instagram" class="social-icon" data-v-1fe4b404><span data-v-1fe4b404>Наши соц сети</span></a></div><div class="contact-item" data-v-1fe4b404><img${ssrRenderAttr("src", $data.images.Mts)} alt="МТС" class="phone-icon" data-v-1fe4b404><a href="tel:+375336130108" class="phone-link" data-v-1fe4b404>+375 33 613-01-08</a></div><div class="contact-item" data-v-1fe4b404><img${ssrRenderAttr("src", $data.images.Mts)} alt="МТС" class="phone-icon" data-v-1fe4b404><a href="tel:+375297177880" class="phone-link" data-v-1fe4b404>+375 29 717-78-80</a></div></div></div></div><div class="navigation-header" data-v-1fe4b404><nav class="main-navigation" data-v-1fe4b404><!--[-->`);
+  _push(`<div class="brand-text" data-v-31f62419><div class="brand-name" data-v-31f62419><p class="red-text" data-v-31f62419>Компания &quot;ТеплоВит&quot; в Витебске</p></div><div class="brand-description" data-v-31f62419><p class="blue-text" data-v-31f62419>Отопление, Водоснабжение</p><p class="blue-text" data-v-31f62419>Альтернативная энергетика</p></div></div></div><div class="contacts-section" data-v-31f62419><div class="contact-item" data-v-31f62419><a href="#" class="social-link" data-v-31f62419><img${ssrRenderAttr("src", $data.images.Vk)} alt="VK" class="social-icon" data-v-31f62419><span data-v-31f62419>Наши соц сети</span></a></div><div class="contact-item" data-v-31f62419><a href="#" class="social-link" data-v-31f62419><img${ssrRenderAttr("src", $data.images.Inst)} alt="Instagram" class="social-icon" data-v-31f62419><span data-v-31f62419>Наши соц сети</span></a></div><div class="contact-item" data-v-31f62419><img${ssrRenderAttr("src", $data.images.Mts)} alt="МТС" class="phone-icon" data-v-31f62419><a href="tel:+375336130108" class="phone-link" data-v-31f62419>+375 33 613-01-08</a></div><div class="contact-item" data-v-31f62419><img${ssrRenderAttr("src", $data.images.Mts)} alt="МТС" class="phone-icon" data-v-31f62419><a href="tel:+375297177880" class="phone-link" data-v-31f62419>+375 29 717-78-80</a></div></div></div></div><div class="navigation-header" data-v-31f62419><nav class="main-navigation" data-v-31f62419><!--[-->`);
   ssrRenderList($data.navLinks, (link) => {
     _push(ssrRenderComponent(_component_router_link, {
       key: link.path,
@@ -290,7 +290,7 @@ _sfc_main$2.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Header.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
-const HeaderComponent = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["ssrRender", _sfc_ssrRender$2], ["__scopeId", "data-v-1fe4b404"]]);
+const HeaderComponent = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["ssrRender", _sfc_ssrRender$2], ["__scopeId", "data-v-31f62419"]]);
 const _sfc_main$1 = {};
 function _sfc_ssrRender$1(_ctx, _push, _parent, _attrs) {
   _push(`<footer${ssrRenderAttrs(_attrs)}><div class="footer_info"><p>© 2013, компания &quot;ТеплоВит&quot;, teplo.vit@mail.ru, +375 33 613 01 08</p></div></footer>`);

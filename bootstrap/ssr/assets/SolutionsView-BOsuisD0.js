@@ -399,13 +399,13 @@ const _sfc_main = {
       // остальные табы в том же формате
     ];
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "solutions-page" }, _attrs))} data-v-38f14e33><div class="solutions-header" data-v-38f14e33><h1 data-v-38f14e33>Готовые решения</h1><div class="header-divider" data-v-38f14e33></div></div><div class="tabs-container" data-v-38f14e33><div class="tabs-navigation" data-v-38f14e33><!--[-->`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "solutions-page" }, _attrs))} data-v-9495079e><div class="solutions-header" data-v-9495079e><h1 data-v-9495079e>Готовые решения</h1><div class="header-divider" data-v-9495079e></div></div><div class="tabs-container" data-v-9495079e><div class="tabs-navigation" data-v-9495079e><!--[-->`);
       ssrRenderList(tabList, (tab) => {
-        _push(`<button class="${ssrRenderClass([{ "active": activeTab.value === tab.id }, "tab-button"])}" data-v-38f14e33>${ssrInterpolate(tab.title)}</button>`);
+        _push(`<button class="${ssrRenderClass([{ "active": activeTab.value === tab.id }, "tab-button"])}" data-v-9495079e>${ssrInterpolate(tab.title)}</button>`);
       });
-      _push(`<!--]--></div><div class="tab-content-wrapper" data-v-38f14e33><!--[-->`);
+      _push(`<!--]--></div><div class="tab-content-wrapper" data-v-9495079e><!--[-->`);
       ssrRenderList(tabList, (tab) => {
-        _push(`<div class="${ssrRenderClass([{ "active": activeTab.value === tab.id }, "tab-content"])}" data-v-38f14e33>${getTabContent(tab.id) ?? ""}</div>`);
+        _push(`<div class="${ssrRenderClass([{ "active": activeTab.value === tab.id }, "tab-content"])}" data-v-9495079e>${getTabContent(tab.id) ?? ""}</div>`);
       });
       _push(`<!--]--></div></div></div>`);
     };
@@ -417,7 +417,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/views/SolutionsView.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const SolutionsView = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-38f14e33"]]);
+const SolutionsView = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-9495079e"]]);
 export {
   SolutionsView as default
 };

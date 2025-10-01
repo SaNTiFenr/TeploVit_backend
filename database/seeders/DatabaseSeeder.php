@@ -19,5 +19,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Создаем админа Nova
+        $this->call([
+            NovaAdminSeeder::class,
+        ]);
     }
 }

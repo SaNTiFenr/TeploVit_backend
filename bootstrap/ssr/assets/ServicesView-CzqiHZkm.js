@@ -108,13 +108,13 @@ const _sfc_main = {
   }
 };
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<div${ssrRenderAttrs(mergeProps({ class: "services-page" }, _attrs))} data-v-03ba3360><div class="services-intro" data-v-03ba3360><h1 class="services-title" data-v-03ba3360>Услуги</h1><p class="services-description" data-v-03ba3360> Компания «ТеплоВит» оказывает следующие услуги: проектирование систем отопления, поставку и монтаж оборудования, сервис и обслуживание, оформление документации и энергоаудит. </p></div><div class="services-slider" data-v-03ba3360><div class="slider-controls" data-v-03ba3360><button class="slider-arrow prev" data-v-03ba3360>❮</button><div class="slider-dots" data-v-03ba3360><!--[-->`);
+  _push(`<div${ssrRenderAttrs(mergeProps({ class: "services-page" }, _attrs))} data-v-6f0a35d5><div class="services-intro" data-v-6f0a35d5><h1 class="services-title" data-v-6f0a35d5>Услуги</h1><p class="services-description" data-v-6f0a35d5> Компания «ТеплоВит» оказывает следующие услуги: проектирование систем отопления, поставку и монтаж оборудования, сервис и обслуживание, оформление документации и энергоаудит. </p></div><div class="services-slider" data-v-6f0a35d5><div class="slider-controls" data-v-6f0a35d5><button class="slider-arrow prev" data-v-6f0a35d5>❮</button><div class="slider-dots" data-v-6f0a35d5><!--[-->`);
   ssrRenderList(6, (n) => {
-    _push(`<span class="${ssrRenderClass([{ "active": $data.slideIndex === n }, "dot"])}" data-v-03ba3360></span>`);
+    _push(`<span class="${ssrRenderClass([{ "active": $data.slideIndex === n }, "dot"])}" data-v-6f0a35d5></span>`);
   });
-  _push(`<!--]--></div><button class="slider-arrow next" data-v-03ba3360>❯</button></div><div class="slides-container" data-v-03ba3360><!--[-->`);
+  _push(`<!--]--></div><button class="slider-arrow next" data-v-6f0a35d5>❯</button></div><div class="slides-container" data-v-6f0a35d5><!--[-->`);
   ssrRenderList($data.slides, (slide, index) => {
-    _push(`<div class="${ssrRenderClass([{ "active": $data.slideIndex === index + 1 }, "service-slide"])}" data-v-03ba3360><div class="slide-content" data-v-03ba3360><h2 class="slide-title" data-v-03ba3360>${ssrInterpolate(slide.title)}</h2><div class="slide-body" data-v-03ba3360>${slide.content ?? ""}</div></div></div>`);
+    _push(`<div class="${ssrRenderClass([{ "active": $data.slideIndex === index + 1 }, "service-slide"])}" data-v-6f0a35d5><div class="slide-content" data-v-6f0a35d5><h2 class="slide-title" data-v-6f0a35d5>${ssrInterpolate(slide.title)}</h2><div class="slide-body" data-v-6f0a35d5>${slide.content ?? ""}</div></div></div>`);
   });
   _push(`<!--]--></div></div></div>`);
 }
@@ -124,7 +124,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/views/ServicesView.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const ServicesView = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__scopeId", "data-v-03ba3360"]]);
+const ServicesView = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", _sfc_ssrRender], ["__scopeId", "data-v-6f0a35d5"]]);
 export {
   ServicesView as default
 };
