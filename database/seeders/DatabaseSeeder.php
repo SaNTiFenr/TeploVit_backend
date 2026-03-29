@@ -23,6 +23,9 @@ class DatabaseSeeder extends Seeder
         // Создаем админа Nova
         $this->call([
             NovaAdminSeeder::class,
+            ProductSeeder::class,
+            NewsSeeder::class,
         ]);
+        
     }
 }

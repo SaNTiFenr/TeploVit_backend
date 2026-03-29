@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -14,19 +13,23 @@ class NovaAdminSeeder extends Seeder
      */
     public function run(): void
     {
+        // Берём логин и пароль из .env
+        $adminEmail = env('NOVA_ADMIN_EMAIL', 'admin@teplovit.com');
+        $adminPassword = env('NOVA_ADMIN_PASSWORD', 'password');
+        $adminName = env('NOVA_ADMIN_NAME', 'Nova Admin');
+
         // Проверяем, существует ли уже админ
-        if (!User::where('email', 'admin@teplovit.com')->exists()) {
+        if (!User::where('email', $adminEmail)->exists()) {
             User::create([
-                'name' => 'Nova Admin',
-                'email' => 'admin@teplovit.com',
+                'name' => $adminName,
+                'email' => $adminEmail,
                 'email_verified_at' => now(),
-                'password' => Hash::make('password'),
+                'password' => Hash::make($adminPassword),
             ]);
-            // создаем категорию
-            
+
             $this->command->info('Nova Admin создан успешно!');
-            $this->command->info('Email: admin@teplovit.com');
-            $this->command->info('Password: password');
+            $this->command->info("Email: {$adminEmail}");
+            $this->command->info("Password: {$adminPassword}");
         } else {
             $this->command->info('Nova Admin уже существует!');
         }
